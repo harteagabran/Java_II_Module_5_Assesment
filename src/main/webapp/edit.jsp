@@ -16,7 +16,11 @@
 		<input name="unitClass" type="text" value="${toEdit.getType() }" />
 		<button type="submit">Save Character</button>
 		
-		Weapons: <br>
+		Weapons: 
+		<c:forEach items="${toEdit.getWeapons()}" var="weap">
+			<b>${weap.name }</b>
+		</c:forEach>
+		<br>
 		<select name="allWeaponsToAdd" multiple size="5">
 				<c:forEach items="${requestScope.allWeapons}" var="currentitem">
 					<option value ="${currentitem.id}">${currentitem.name} | ${currentitem.damage}</option>

@@ -80,6 +80,9 @@ public class Unit {
 		return "Unit: " + this.name + " : " + this.type;
 	}
 	
+	public List<Weapon> getWeapons() {
+		return this.weapons;
+	}
 	public void setWeapons(List<Weapon> weapons) {
 		this.weapons = weapons;
 	}
