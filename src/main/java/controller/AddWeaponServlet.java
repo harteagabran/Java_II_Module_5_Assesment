@@ -7,42 +7,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Weapon;
+
 /**
- * Servlet implementation class ViewAllUnitsServlet
+ * Servlet implementation class AddWeaponServlet
  */
-@WebServlet("/viewAllUnitsServlet")
-public class ViewAllUnitsServlet extends HttpServlet {
+@WebServlet("/addWeaponServlet")
+public class AddWeaponServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllUnitsServlet() {
+    public AddWeaponServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		UnitHelper uh = new UnitHelper();
-		request.setAttribute("allunits", uh.showAllUnits());
-		
-		String path = "/character-list.jsp";
-		
-		
-		
-		getServletContext().getRequestDispatcher(path).forward(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String name = request.getParameter("name");
+		int damage = Integer.parseInt(request.getParameter("damage"));
+		
+		Weapon a = new Weapon(name, damage);
+		WeaponHelper wh = new WeaponHelper();
+		wh.insertWeapon(a);
+		
+		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 	}
 
 }

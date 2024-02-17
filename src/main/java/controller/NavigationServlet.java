@@ -39,6 +39,7 @@ public class NavigationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String act = request.getParameter("doThisToUnit");
 		UnitHelper uh = new UnitHelper();
+		WeaponHelper wh = new WeaponHelper();
 		String path = "/viewAllUnitsServlet";
 		
 		if(act.equals("delete")) {
@@ -53,7 +54,14 @@ public class NavigationServlet extends HttpServlet {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
 				Unit toEdit = uh.searchForUnitById(tempId);
+				
 				request.setAttribute("toEdit", toEdit);
+				request.setAttribute("allWeapons", wh.showAllWeapons());
+				
+				if(wh.showAllWeapons().isEmpty()) {
+					request.setAttribute("allWeapons", " ");
+				}
+				
 				path = "/edit.jsp";
 			} catch (NumberFormatException e) {
 				System.out.println("Forgot to select a unit");
